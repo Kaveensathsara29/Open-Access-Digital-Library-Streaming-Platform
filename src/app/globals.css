@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-yellow: #f59e0b;
+  --color-brand-yellow-hover: #d97706;
+  --color-brand-yellow-light: #fef3c7;
+  --color-brand-gold: #fbbf24;
+  --color-brand-dark: #0f172a;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
+  --accent-yellow: #f59e0b;
+}
+
+.dark {
+  --background: #090d16;
+  --foreground: #f8fafc;
+  --card-bg: #111827;
+  --border-color: #1e293b;
+  --accent-yellow: #fbbf24;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+@keyframes content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll-content-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main > div > section:first-child,
+main :is(h1, h2, h3, p, form, input, textarea, select, button, .grid > *) {
+  animation: content-enter 600ms cubic-bezier(0.2, 0.65, 0.3, 1) both;
+}
+
+main :is(h1, h2, h3) {
+  animation-delay: 120ms;
+}
+
+main p {
+  animation-delay: 220ms;
+}
+
+main form {
+  animation-delay: 320ms;
+}
+
+main :is(input, textarea, select) {
+  animation-delay: 400ms;
+}
+
+main :is(button, a) {
+  animation: content-enter 600ms cubic-bezier(0.2, 0.65, 0.3, 1) 480ms both;
+}
+
+@supports (animation-timeline: view()) {
+  main > div > section:not(:first-child),
+  main .grid > * {
+    animation-name: scroll-content-reveal;
+    animation-duration: 1ms;
+    animation-timing-function: linear;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main > div > section:first-child,
+  main :is(h1, h2, h3, p, form, input, textarea, select, button, a, .grid > *),
+  main > div > section:not(:first-child) {
+    animation: none;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Security & PDF Protection Rules */
+.no-copy {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Strict Anti-Print CSS Protection */
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+  .protected-reader,
+  .reader-viewport,
+  canvas {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  body::before {
+    content: "PROTECTED CONTENT: Direct printing and offline duplication of this digital library asset is strictly prohibited by security policy.";
+    visibility: visible !important;
+    display: block;
+    position: fixed;
+    top: 30%;
+    left: 10%;
+    right: 10%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: #dc2626;
+    border: 2px dashed #dc2626;
+    padding: 30px;
+    background: #fff;
+  }
+}
+
+/* Diagonal Watermark Layer */
+.watermark-grid {
+  pointer-events: none;
+  background-size: 280px 220px;
+}
