@@ -43,7 +43,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="pt-6 border-t border-slate-100 dark:border-slate-800 space-y-3">
           <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-[11px] text-amber-900 dark:text-amber-300 flex items-center gap-2">
             <HardDrive className="w-4 h-4 text-amber-500 shrink-0" />
-            <span>Files are stored in local storage temporarily</span>
+            <span>Files are stored in Cloud</span>
           </div>
           <Link href="/" className="flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-amber-600 dark:hover:text-amber-400">
             <ArrowLeft className="w-3.5 h-3.5" />
