@@ -12,7 +12,7 @@ A modern, high-performance, fully responsive, and SEO-optimized Public Digital L
 * **🚀 SEO & Performance:** Built with Next.js App Router for server-side rendering and fast load times.
 * **🔓 Open Access:** No login or account registration required for users.
 * **📖 PDF Reader:** Interactive book viewing and streaming capabilities.
-* **☁️ Cloud Document Management: Securely stores, retrieves, and streams large PDF files using Google Cloud Drive API.
+* ☁️ Cloud Document Management: Securely stores, retrieves, and streams large PDF files using Google Cloud Drive API.
 * **🔍 Instant Search:** Filter and search books easily by categories, titles, or authors.
 
 ---
