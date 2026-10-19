@@ -23,7 +23,7 @@ A modern, high-performance, fully responsive, and SEO-optimized Public Digital L
 - **Programming Language:** TypeScript
 - **Styling & UI:** Tailwind CSS
 - **Database Engine:** MongoDB (via Mongoose ORM)
-- **Cloud Storage & Storage API: Google Cloud Drive API (via OAuth 2.0)
+- Cloud Storage & Storage API: Google Cloud Drive API (via OAuth 2.0)
 
 ---
 
