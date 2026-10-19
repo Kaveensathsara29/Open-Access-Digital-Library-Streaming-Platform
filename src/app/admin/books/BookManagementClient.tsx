@@ -12,7 +12,7 @@ import {
   X,
   Check,
   AlertCircle,
-  HardDrive,
+  Cloud,
 } from "lucide-react";
 
 interface AdminBookItem {
@@ -156,17 +156,18 @@ export function BookManagementClient() {
 
       const data = await res.json();
       if (!res.ok) {
-        setErrorMsg(data.error || "File upload failed.");
+        const msg = data.detail ? `${data.error} — ${data.detail}` : (data.error || "File upload failed.");
+        setErrorMsg(msg);
       } else {
         if (type === "pdf") {
           setPdfUrl(data.url);
-          setSuccessMsg("PDF uploaded successfully to local storage.");
+          setSuccessMsg("PDF uploaded successfully to Google Drive.");
         } else if (type === "cover") {
           setCoverImage(data.url);
-          setSuccessMsg("Cover image uploaded successfully to local storage.");
+          setSuccessMsg("Cover image uploaded successfully to Google Drive.");
         } else {
           setAudioUrl(data.url);
-          setSuccessMsg("Audiobook uploaded successfully to local storage.");
+          setSuccessMsg("Audiobook uploaded successfully to Google Drive.");
         }
       }
     } catch {
@@ -529,8 +530,8 @@ export function BookManagementClient() {
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                    <HardDrive className="w-3.5 h-3.5 text-amber-500" />
-                    <span>PDF URL / Local Storage *</span>
+                    <Cloud className="w-3.5 h-3.5 text-amber-500" />
+                    <span>PDF URL / Google Drive *</span>
                   </label>
                   <label className="cursor-pointer text-[11px] font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1">
                     <Upload className="w-3 h-3" />
@@ -584,7 +585,7 @@ export function BookManagementClient() {
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                    Audiobook URL / Local Storage (Optional)
+                    Audiobook URL / Google Drive (Optional)
                   </label>
                   <label className="cursor-pointer text-[11px] font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1">
                     <Upload className="w-3 h-3" />
