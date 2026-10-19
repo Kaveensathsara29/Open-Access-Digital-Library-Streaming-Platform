@@ -1,6 +1,6 @@
 # 📚 Digital Library System
 
-A modern, high-performance, fully responsive, and SEO-optimized Public Digital Library System built with Next.js, TypeScript, Tailwind CSS, and MongoDB. Open-access platform designed for seamless book browsing, searching, and PDF reading across all devices.
+A modern, high-performance, fully responsive, and SEO-optimized Public Digital Library System built with Next.js, TypeScript, Tailwind CSS, and MongoDB. Open-access platform designed for seamless cloud-based book browsing, searching, and PDF reading across all devices.
 
 🔗 **Live Demo:** [https://digital-public-library-system.vercel.app/](https://digital-public-library-system.vercel.app/)
 
