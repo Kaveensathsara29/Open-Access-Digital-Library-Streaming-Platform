@@ -106,27 +106,28 @@ export default async function HomePage() {
 
       {/* Featured Books Section */}
       {featuredBooks.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-6">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-5 sm:space-y-6">
           <div className="flex items-end justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
                 <Sparkles className="w-4 h-4" />
                 <span>Hand-Picked Highlights</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white mt-1">
+              <h2 className="text-xl sm:text-3xl font-extrabold text-slate-950 dark:text-white mt-1">
                 Featured Volumes
               </h2>
             </div>
             <Link
               href="/books?featured=true"
-              className="text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1"
+              className="text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1 shrink-0"
             >
-              View all featured
+              View all
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {/* Mobile: 3-col compact  |  sm+: standard full cards */}
+          <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-5 lg:gap-6">
             {featuredBooks.map((book) => (
               <BookCard key={book._id} book={book} />
             ))}
@@ -136,55 +137,55 @@ export default async function HomePage() {
 
       {/* Core Architectural Features Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="p-8 sm:p-12 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+        <div className="p-4 sm:p-8 lg:p-12 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-6 sm:space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-3">
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
               Built For Enterprise Excellence
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white">
+            <h2 className="text-xl sm:text-3xl font-extrabold text-slate-950 dark:text-white">
               Reader & Content Management Architecture
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed hidden sm:block">
               Every detail is engineered for high performance, intuitive UX, and uncompromising asset protection.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-3 gap-2 sm:gap-6">
             {/* Feature 1 */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950/60 flex items-center justify-center text-amber-600 dark:text-amber-400 font-bold">
-                <ShieldCheck className="w-5 h-5 stroke-[2.5]" />
+            <div className="p-2 sm:p-6 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 space-y-1.5 sm:space-y-3 text-center sm:text-left">
+              <div className="w-7 h-7 sm:w-10 sm:h-10 mx-auto sm:mx-0 rounded-lg sm:rounded-xl bg-amber-100 dark:bg-amber-950/60 flex items-center justify-center text-amber-600 dark:text-amber-400 font-bold shrink-0">
+                <ShieldCheck className="w-3.5 h-3.5 sm:w-5 sm:h-5 stroke-[2.5]" />
               </div>
-              <h3 className="font-bold text-base text-slate-900 dark:text-white">
+              <h3 className="font-bold text-[10px] sm:text-base text-slate-900 dark:text-white leading-tight">
                 Public In-Browser Reader
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-400 leading-relaxed hidden sm:block">
                 Read available books directly in your browser without an account or registration.
               </p>
             </div>
 
             {/* Feature 2 */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950/60 flex items-center justify-center text-amber-600 dark:text-amber-400 font-bold">
-                <BookOpen className="w-5 h-5 stroke-[2.5]" />
+            <div className="p-2 sm:p-6 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 space-y-1.5 sm:space-y-3 text-center sm:text-left">
+              <div className="w-7 h-7 sm:w-10 sm:h-10 mx-auto sm:mx-0 rounded-lg sm:rounded-xl bg-amber-100 dark:bg-amber-950/60 flex items-center justify-center text-amber-600 dark:text-amber-400 font-bold shrink-0">
+                <BookOpen className="w-3.5 h-3.5 sm:w-5 sm:h-5 stroke-[2.5]" />
               </div>
-              <h3 className="font-bold text-base text-slate-900 dark:text-white">
+              <h3 className="font-bold text-[10px] sm:text-base text-slate-900 dark:text-white leading-tight">
                 Free Public Reading
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-400 leading-relaxed hidden sm:block">
                 Open books in the browser immediately. No registration, profile, or personal data is required.
               </p>
             </div>
 
             {/* Feature 3 */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950/60 flex items-center justify-center text-amber-600 dark:text-amber-400 font-bold">
-                <Headphones className="w-5 h-5 stroke-[2.5]" />
+            <div className="p-2 sm:p-6 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 space-y-1.5 sm:space-y-3 text-center sm:text-left">
+              <div className="w-7 h-7 sm:w-10 sm:h-10 mx-auto sm:mx-0 rounded-lg sm:rounded-xl bg-amber-100 dark:bg-amber-950/60 flex items-center justify-center text-amber-600 dark:text-amber-400 font-bold shrink-0">
+                <Headphones className="w-3.5 h-3.5 sm:w-5 sm:h-5 stroke-[2.5]" />
               </div>
-              <h3 className="font-bold text-base text-slate-900 dark:text-white">
+              <h3 className="font-bold text-[10px] sm:text-base text-slate-900 dark:text-white leading-tight">
                 Audiobook Narration Player
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-400 leading-relaxed hidden sm:block">
                 Integrated audio playback with custom speeds (0.75x–2.0x), timeline scrubber, quick 15-second skipping, and background listening.
               </p>
             </div>
@@ -232,27 +233,28 @@ export default async function HomePage() {
       )}
 
       {/* Recent Books Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-5 sm:space-y-6">
         <div className="flex items-center justify-between">
           <div>
             <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
               <TrendingUp className="w-4 h-4" />
               <span>Catalog Additions</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white mt-1">
+            <h2 className="text-xl sm:text-3xl font-extrabold text-slate-950 dark:text-white mt-1">
               Latest Additions
             </h2>
           </div>
           <Link
             href="/books"
-            className="text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1"
+            className="text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1 shrink-0"
           >
-            Explore all {recentBooks.length} books
+            <span className="hidden xs:inline">Explore all {recentBooks.length} books</span>
+            <span className="xs:hidden">Explore all</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-5 lg:gap-6">
           {recentBooks.map((book) => (
             <BookCard key={book._id} book={book} />
           ))}

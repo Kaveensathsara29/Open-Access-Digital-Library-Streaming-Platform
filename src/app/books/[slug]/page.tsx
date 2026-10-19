@@ -106,7 +106,7 @@ export default async function BookDetailPage({ params }: PageProps) {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-10 sm:space-y-12">
       {/* Schema.org/Book JSON-LD */}
       <script
         type="application/ld+json"
@@ -114,10 +114,10 @@ export default async function BookDetailPage({ params }: PageProps) {
       />
 
       {/* Main Book Overview Hero */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
         {/* Left Column: Book Cover & Quick Action Buttons */}
-        <div className="lg:col-span-4 flex flex-col items-center sm:items-start space-y-5">
-          <div className="relative w-full max-w-[320px] aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl shadow-amber-500/10 border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 group">
+        <div className="lg:col-span-4 flex flex-col items-center lg:items-start space-y-4 sm:space-y-5">
+          <div className="relative w-full max-w-[260px] sm:max-w-[300px] lg:max-w-[320px] aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl shadow-amber-500/10 border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 group mx-auto lg:mx-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={book.coverImage}
@@ -136,7 +136,7 @@ export default async function BookDetailPage({ params }: PageProps) {
           </div>
 
           {/* Action CTAs */}
-          <div className="w-full max-w-[320px] space-y-3">
+          <div className="w-full max-w-[260px] sm:max-w-[300px] lg:max-w-[320px] space-y-3 mx-auto lg:mx-0">
             <Link
               href={`/reader/${book._id}`}
               className="w-full py-3.5 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold text-sm shadow-lg shadow-amber-400/25 flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-95"
@@ -144,18 +144,17 @@ export default async function BookDetailPage({ params }: PageProps) {
               <BookOpen className="w-4 h-4 stroke-[2.5]" />
               <span>Read in Online Reader</span>
             </Link>
-
           </div>
 
           {/* Social Media Sharing */}
-          <div className="w-full max-w-[320px] pt-2">
+          <div className="w-full max-w-[260px] sm:max-w-[300px] lg:max-w-[320px] pt-1 mx-auto lg:mx-0">
             <SocialShare title={book.title} url={pageUrl} />
           </div>
         </div>
 
         {/* Right Column: Metadata, Description & Reader Features */}
-        <div className="lg:col-span-8 space-y-6">
-          <div className="space-y-3">
+        <div className="lg:col-span-8 space-y-5 sm:space-y-6">
+          <div className="space-y-2 sm:space-y-3">
             <div className="flex flex-wrap items-center gap-2">
               <span className="px-3 py-1 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 font-bold text-xs uppercase tracking-wider">
                 {book.category}
@@ -165,11 +164,11 @@ export default async function BookDetailPage({ params }: PageProps) {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 dark:text-white tracking-tight leading-tight">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 dark:text-white tracking-tight leading-tight">
               {book.title}
             </h1>
 
-            <p className="text-base sm:text-lg font-medium text-slate-600 dark:text-slate-300">
+            <p className="text-sm sm:text-lg font-medium text-slate-600 dark:text-slate-300">
               by <span className="text-amber-600 dark:text-amber-400 font-bold">{book.author}</span>
             </p>
 
@@ -181,36 +180,36 @@ export default async function BookDetailPage({ params }: PageProps) {
           </div>
 
           {/* Quick Specifications Pill Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-4 border-y border-slate-200 dark:border-slate-800 text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 py-3 sm:py-4 border-y border-slate-200 dark:border-slate-800 text-xs">
             <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-              <Layers className="w-4 h-4 text-amber-500" />
-              <div>
+              <Layers className="w-4 h-4 text-amber-500 shrink-0" />
+              <div className="min-w-0">
                 <span className="block text-[10px] text-slate-400 uppercase font-semibold">Pages</span>
-                <span className="font-bold text-slate-900 dark:text-white">{book.pageCount} Pages</span>
+                <span className="font-bold text-slate-900 dark:text-white truncate">{book.pageCount} Pages</span>
               </div>
             </div>
 
             <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-              <Globe className="w-4 h-4 text-amber-500" />
-              <div>
+              <Globe className="w-4 h-4 text-amber-500 shrink-0" />
+              <div className="min-w-0">
                 <span className="block text-[10px] text-slate-400 uppercase font-semibold">Language</span>
-                <span className="font-bold text-slate-900 dark:text-white uppercase">
+                <span className="font-bold text-slate-900 dark:text-white uppercase truncate">
                   {book.language || "English"}
                 </span>
               </div>
             </div>
 
             <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-              <Calendar className="w-4 h-4 text-amber-500" />
-              <div>
+              <Calendar className="w-4 h-4 text-amber-500 shrink-0" />
+              <div className="min-w-0">
                 <span className="block text-[10px] text-slate-400 uppercase font-semibold">Year</span>
                 <span className="font-bold text-slate-900 dark:text-white">{book.publishedYear}</span>
               </div>
             </div>
 
             <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-              <ShieldCheck className="w-4 h-4 text-emerald-500" />
-              <div>
+              <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
+              <div className="min-w-0">
                 <span className="block text-[10px] text-slate-400 uppercase font-semibold">Format</span>
                 <span className="font-bold text-slate-900 dark:text-white">PDF Reader</span>
               </div>
@@ -218,7 +217,7 @@ export default async function BookDetailPage({ params }: PageProps) {
           </div>
 
           {/* Description */}
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             <h3 className="font-bold text-base text-slate-900 dark:text-white">Overview & Synopsis</h3>
             <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">
               {book.description}
@@ -227,8 +226,8 @@ export default async function BookDetailPage({ params }: PageProps) {
 
           {/* Tags */}
           {book.tags && book.tags.length > 0 && (
-            <div className="flex flex-wrap items-center gap-2 pt-2">
-              <Tag className="w-3.5 h-3.5 text-amber-500 mr-1" />
+            <div className="flex flex-wrap items-center gap-2 pt-1 sm:pt-2">
+              <Tag className="w-3.5 h-3.5 text-amber-500 mr-1 shrink-0" />
               {book.tags.map((tag: string) => (
                 <Link
                   key={tag}
@@ -243,7 +242,7 @@ export default async function BookDetailPage({ params }: PageProps) {
 
           {/* Audiobook Player Section */}
           {book.audioUrl && (
-            <div className="pt-4 space-y-2">
+            <div className="pt-3 sm:pt-4 space-y-2">
               <AudioPlayer
                 audioUrl={book.audioUrl}
                 bookTitle={book.title}
@@ -256,9 +255,9 @@ export default async function BookDetailPage({ params }: PageProps) {
       </div>
 
       {/* Public reader information */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-amber-50/60 dark:bg-slate-900/60 border border-amber-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="p-5 sm:p-8 rounded-3xl bg-amber-50/60 dark:bg-slate-900/60 border border-amber-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6 text-center sm:text-left">
         <div className="space-y-2 max-w-xl">
-          <div className="flex items-center gap-2 text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider">
+          <div className="flex items-center justify-center sm:justify-start gap-2 text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider">
             <BookOpen className="w-4 h-4 text-amber-500" />
             <span>Interactive e-Reader Ready</span>
           </div>
@@ -271,7 +270,7 @@ export default async function BookDetailPage({ params }: PageProps) {
         </div>
         <Link
           href={`/reader/${book._id}`}
-          className="px-6 py-3 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold text-xs shadow-md shadow-amber-400/20 whitespace-nowrap flex items-center gap-2 transition-all"
+          className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold text-xs shadow-md shadow-amber-400/20 whitespace-nowrap flex items-center justify-center gap-2 transition-all shrink-0"
         >
           <span>Open e-Reader</span>
           <ArrowRight className="w-4 h-4" />

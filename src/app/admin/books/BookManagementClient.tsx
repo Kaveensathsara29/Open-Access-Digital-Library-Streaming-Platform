@@ -308,7 +308,7 @@ export function BookManagementClient() {
         </select>
       </div>
 
-      {/* Books Table */}
+      {/* Books List */}
       <div className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs">
         {loading ? (
           <div className="py-20 flex flex-col items-center justify-center gap-2 text-amber-500">
@@ -320,67 +320,117 @@ export function BookManagementClient() {
             No books found matching search filters.
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-400 font-bold uppercase tracking-wider text-[10px]">
-                <tr>
-                  <th className="py-3.5 px-4">Book</th>
-                  <th className="py-3.5 px-4">Category</th>
-                  <th className="py-3.5 px-4">Pages</th>
-                  <th className="py-3.5 px-4">Sample Limit</th>
-                  <th className="py-3.5 px-4">Reads / Views</th>
-                  <th className="py-3.5 px-4">Audio</th>
-                  <th className="py-3.5 px-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                {filteredBooks.map((b) => (
-                  <tr key={b._id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-3">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={b.coverImage}
-                          alt={b.title}
-                          className="w-9 h-13 object-cover rounded-md shadow-xs shrink-0"
-                        />
-                        <div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-bold text-slate-900 dark:text-white line-clamp-1">
-                              {b.title}
-                            </span>
-                            {b.isFeatured && (
-                              <span className="px-1.5 py-0.5 rounded-sm bg-amber-400 text-slate-950 font-bold text-[9px] uppercase">
-                                Featured
+          <>
+            {/* Desktop Table — hidden on mobile */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-400 font-bold uppercase tracking-wider text-[10px]">
+                  <tr>
+                    <th className="py-3.5 px-4">Book</th>
+                    <th className="py-3.5 px-4">Category</th>
+                    <th className="py-3.5 px-4">Pages</th>
+                    <th className="py-3.5 px-4">Sample Limit</th>
+                    <th className="py-3.5 px-4">Reads / Views</th>
+                    <th className="py-3.5 px-4">Audio</th>
+                    <th className="py-3.5 px-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                  {filteredBooks.map((b) => (
+                    <tr key={b._id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-3">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={b.coverImage}
+                            alt={b.title}
+                            className="w-9 h-13 object-cover rounded-md shadow-xs shrink-0"
+                          />
+                          <div>
+                            <div className="flex items-center gap-1.5">
+                              <span className="font-bold text-slate-900 dark:text-white line-clamp-1">
+                                {b.title}
                               </span>
-                            )}
+                              {b.isFeatured && (
+                                <span className="px-1.5 py-0.5 rounded-sm bg-amber-400 text-slate-950 font-bold text-[9px] uppercase">
+                                  Featured
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[11px] text-slate-400">by {b.author}</p>
                           </div>
-                          <p className="text-[11px] text-slate-400">by {b.author}</p>
                         </div>
+                      </td>
+                      <td className="py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">
+                        {b.category}
+                      </td>
+                      <td className="py-3 px-4 text-slate-500">{b.pageCount} pgs</td>
+                      <td className="py-3 px-4 text-amber-600 dark:text-amber-400 font-bold">
+                        {b.samplePreviewPages || 5} pgs
+                      </td>
+                      <td className="py-3 px-4 text-slate-600 dark:text-slate-300">
+                        <span className="font-bold">{b.readCount || 0}</span> reads /{" "}
+                        <span>{b.viewsCount || 0}</span> views
+                      </td>
+                      <td className="py-3 px-4">
+                        {b.audioUrl ? (
+                          <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 text-[10px] font-bold">
+                            Yes
+                          </span>
+                        ) : (
+                          <span className="text-slate-400 text-[10px]">None</span>
+                        )}
+                      </td>
+                      <td className="py-3 px-4 text-right">
+                        <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            onClick={() => openEditModal(b)}
+                            className="p-1.5 rounded-lg text-slate-600 hover:text-amber-600 hover:bg-amber-50 dark:text-slate-300 dark:hover:bg-slate-800"
+                            title="Edit Book"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => handleDelete(b._id, b.title)}
+                            className="p-1.5 rounded-lg text-slate-600 hover:text-red-600 hover:bg-red-50 dark:text-slate-300 dark:hover:bg-slate-800"
+                            title="Delete Book"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Card List — visible only on mobile */}
+            <div className="md:hidden divide-y divide-slate-100 dark:divide-slate-800">
+              {filteredBooks.map((b) => (
+                <div key={b._id} className="flex items-start gap-3 p-4">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={b.coverImage}
+                    alt={b.title}
+                    className="w-12 h-16 object-cover rounded-lg shadow-xs shrink-0"
+                  />
+                  <div className="flex-1 min-w-0 space-y-1">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          <span className="font-bold text-sm text-slate-900 dark:text-white line-clamp-1">
+                            {b.title}
+                          </span>
+                          {b.isFeatured && (
+                            <span className="px-1.5 py-0.5 rounded-sm bg-amber-400 text-slate-950 font-bold text-[9px] uppercase shrink-0">
+                              Featured
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[11px] text-slate-400">by {b.author}</p>
                       </div>
-                    </td>
-                    <td className="py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">
-                      {b.category}
-                    </td>
-                    <td className="py-3 px-4 text-slate-500">{b.pageCount} pgs</td>
-                    <td className="py-3 px-4 text-amber-600 dark:text-amber-400 font-bold">
-                      {b.samplePreviewPages || 5} pgs
-                    </td>
-                    <td className="py-3 px-4 text-slate-600 dark:text-slate-300">
-                      <span className="font-bold">{b.readCount || 0}</span> reads /{" "}
-                      <span>{b.viewsCount || 0}</span> views
-                    </td>
-                    <td className="py-3 px-4">
-                      {b.audioUrl ? (
-                        <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 text-[10px] font-bold">
-                          Yes
-                        </span>
-                      ) : (
-                        <span className="text-slate-400 text-[10px]">None</span>
-                      )}
-                    </td>
-                    <td className="py-3 px-4 text-right">
-                      <div className="flex items-center justify-end gap-1.5">
+                      <div className="flex items-center gap-1 shrink-0">
                         <button
                           onClick={() => openEditModal(b)}
                           className="p-1.5 rounded-lg text-slate-600 hover:text-amber-600 hover:bg-amber-50 dark:text-slate-300 dark:hover:bg-slate-800"
@@ -396,19 +446,31 @@ export function BookManagementClient() {
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-slate-500 dark:text-slate-400">
+                      <span className="font-semibold text-amber-700 dark:text-amber-400">{b.category}</span>
+                      <span>{b.pageCount} pgs</span>
+                      <span>Sample: <span className="font-bold text-amber-600 dark:text-amber-400">{b.samplePreviewPages || 5} pgs</span></span>
+                      <span><span className="font-bold text-slate-700 dark:text-slate-300">{b.readCount || 0}</span> reads</span>
+                      <span><span className="text-slate-600 dark:text-slate-400">{b.viewsCount || 0}</span> views</span>
+                      {b.audioUrl && (
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 font-bold">
+                          Audio
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </div>
 
       {/* Create / Edit Modal */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs overflow-y-auto">
-          <div className="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-6 my-8">
+        <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-3 sm:p-4 bg-slate-950/60 backdrop-blur-xs overflow-y-auto">
+          <div className="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-5 sm:space-y-6 my-4 sm:my-8 max-h-[calc(100vh-2rem)] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2">
                 <BookCopy className="w-5 h-5 text-amber-500" />
